@@ -60,3 +60,56 @@
     opacity: 0.35;
   }
 }
+
+/* ArchitecturePanel — simulated packet flow.
+   Base state (also used with prefers-reduced-motion): packets, trails and
+   node pulses are hidden; only the static diagram remains. */
+.arch-packet,
+.arch-tail {
+  opacity: 0;
+  stroke-dashoffset: 8;
+}
+.arch-packet {
+  stroke-dasharray: 0.5 2000;
+}
+.arch-tail {
+  stroke-dasharray: 36 2000;
+  stroke-dashoffset: 44;
+}
+.arch-glow {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --arch-cycle: 7s;
+  }
+  .arch-packet {
+    opacity: 1;
+    animation: arch-packet var(--arch-cycle) linear var(--delay, 0s) infinite;
+  }
+  .arch-tail {
+    opacity: 0.5;
+    animation: arch-tail var(--arch-cycle) linear var(--delay, 0s) infinite;
+  }
+  .arch-glow {
+    animation: arch-glow var(--arch-cycle) ease-out var(--delay, 0s) infinite;
+  }
+}
+
+/* Dash offsets are in viewBox units: a packet covers ~780 units per cycle
+   (~110 units/s), far more than any link, so it rests off-path until its turn. */
+@keyframes arch-packet {
+  from { stroke-dashoffset: 8; }
+  to { stroke-dashoffset: -772; }
+}
+@keyframes arch-tail {
+  from { stroke-dashoffset: 44; }
+  to { stroke-dashoffset: -736; }
+}
+@keyframes arch-glow {
+  0% { opacity: 0; }
+  3% { opacity: 1; }
+  22% { opacity: 0; }
+  100% { opacity: 0; }
+}
