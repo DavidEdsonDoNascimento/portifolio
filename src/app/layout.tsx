@@ -14,11 +14,11 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.title} | Portfolio`,
+  title: `${siteConfig.name} | ${siteConfig.title}`,
   description: siteConfig.description,
   openGraph: {
     type: "website",
-    title: `${siteConfig.title} | Portfolio`,
+    title: `${siteConfig.name} | ${siteConfig.title}`,
     description: siteConfig.description,
     siteName: siteConfig.name,
     locale: "en_US",
