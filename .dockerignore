@@ -1,0 +1,17 @@
+ref/
+node_modules
+.next
+out
+build
+coverage
+.git
+.gitignore
+.env*
+*.tsbuildinfo
+npm-debug.log*
+pnpm-debug.log*
+Dockerfile
+.dockerignore
+README.md
+AGENTS.md
+claude-reports
