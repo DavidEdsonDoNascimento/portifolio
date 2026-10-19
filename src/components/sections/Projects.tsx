@@ -16,7 +16,11 @@ export function Projects() {
         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <li key={project.id}>
-              <article className="border-border bg-surface hover:border-primary/50 group flex h-full flex-col overflow-hidden rounded-2xl border transition-colors duration-200">
+              <article className="border-border bg-surface hover:border-primary/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 motion-safe:hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_color-mix(in_srgb,var(--color-primary)_30%,transparent)]">
+                <div
+                  className="via-primary/60 pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  aria-hidden="true"
+                />
                 <div
                   className="bg-surface-elevated border-border relative aspect-[4/3] border-b"
                   aria-hidden="true"
@@ -42,7 +46,7 @@ export function Projects() {
                     ))}
                   </ul>
                   <p className="text-muted mt-5 inline-flex items-center gap-1 text-sm">
-                    Case study coming soon <ArrowUpRight size={14} aria-hidden />
+                    Case study coming soon <ArrowUpRight size={14} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
                   </p>
                 </div>
               </article>

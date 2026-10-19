@@ -7,7 +7,7 @@ export function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="border-border border-t px-6 py-24"
+      className="border-border min-h-[calc(100svh-12rem)] border-t px-6 py-24"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading
@@ -22,7 +22,7 @@ export function Contact() {
               {item.href ? (
                 <a
                   href={item.href}
-                  className="border-border bg-surface hover:border-primary/50 flex items-center justify-between rounded-2xl border p-6 transition-colors"
+                  className="border-border bg-surface hover:border-primary/50 flex items-center justify-between rounded-2xl border p-6 transition-all duration-200 motion-safe:hover:-translate-y-0.5"
                 >
                   <span className="font-display text-lg font-semibold">{item.label}</span>
                   <ArrowUpRight size={18} className="text-primary" aria-hidden />
