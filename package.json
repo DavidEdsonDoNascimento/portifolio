@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test src/lib/packet-rush.test.ts src/lib/site-url.test.ts src/lib/seo.test.ts src/i18n/messages.test.ts",
+    "test": "node --test src/lib/packet-rush.test.ts src/lib/site-url.test.ts src/lib/seo.test.ts src/lib/resume.test.ts src/i18n/messages.test.ts",
     "resume:build": "node scripts/build-resume.mjs"
   },
   "dependencies": {
