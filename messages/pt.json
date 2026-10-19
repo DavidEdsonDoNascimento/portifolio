@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "{name} | Engenheiro de Software Full Stack Sênior",
-    "description": "Portfólio de um Engenheiro de Software Full Stack Sênior que desenvolve aplicações escaláveis, integrações em tempo real e experiências digitais bem planejadas."
+    "description": "Engenheiro de Software Full Stack Sênior com mais de 10 anos de experiência em aplicações escaláveis, integrações em tempo real, plataformas corporativas e soluções sob medida.",
+    "ogTagline": "Construindo sistemas complexos. Tornando tudo mais simples."
   },
   "common": {
     "skipToContent": "Pular para o conteúdo",
@@ -232,11 +233,23 @@
     "eyebrow": "05 / Contato",
     "title": "Vamos construir algo juntos.",
     "description": "A melhor forma de falar comigo é por e-mail ou LinkedIn.",
+    "resume": {
+      "label": "Baixar Currículo",
+      "meta": "PDF · Português"
+    },
     "labels": {
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "email": "E-mail"
     }
+  },
+  "resume": {
+    "title": "{name} — Currículo",
+    "summary": "Resumo",
+    "experience": "Experiência",
+    "skills": "Competências técnicas",
+    "education": "Formação",
+    "technologies": "Tecnologias"
   },
   "footer": {
     "builtWith": "Feito com Next.js, TypeScript e Tailwind CSS.",

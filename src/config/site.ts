@@ -12,6 +12,11 @@ export const siteConfig = {
     { id: "about", href: "#about" },
     { id: "contact", href: "#contact" },
   ],
+  // Public resume PDFs (built by `pnpm resume:build`), one per language.
+  resume: {
+    en: "/resume/David-Nascimento-Resume-EN.pdf",
+    pt: "/resume/David-Nascimento-Curriculo-PT.pdf",
+  },
   stack: ["TypeScript", "React", "Next.js", "Node.js", "NestJS", "Docker"],
   contact: [
     {

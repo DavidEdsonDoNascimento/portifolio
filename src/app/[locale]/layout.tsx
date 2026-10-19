@@ -5,6 +5,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { siteConfig } from "@/config/site";
 import { htmlLang, routing } from "@/i18n/routing";
+import { OG_SIZE } from "@/lib/og-image";
+import { localePath, pageAlternates, robotsMeta } from "@/lib/seo";
+import { siteUrl } from "@/lib/site-url";
 import "../globals.css";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -17,39 +20,53 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const ogLocale = { en: "en_US", pt: "pt_BR" } as const;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+
   const t = await getTranslations({ locale, namespace: "metadata" });
   const title = t("title", { name: siteConfig.name });
+  const description = t("description");
+  const ogAlt = `${siteConfig.name} — ${(await getTranslations({ locale, namespace: "hero" }))("role")}`;
 
-  // Optional: set NEXT_PUBLIC_SITE_URL (e.g. at build time) once the domain is
-  // defined to emit canonical + hreflang. Nothing is assumed until then.
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  const alternates = siteUrl
-    ? {
-        metadataBase: new URL(siteUrl),
-        alternates: {
-          canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
-          languages: { en: "/", "pt-BR": "/pt", "x-default": "/" },
-        },
-      }
-    : {};
-
-  return {
+  const base: Metadata = {
     title,
-    description: t("description"),
+    description,
+    // Stay out of search indexes until a valid public URL is configured.
+    robots: robotsMeta(siteUrl.configured),
+  };
+
+  // Without a valid NEXT_PUBLIC_SITE_URL nothing absolute is emitted: no
+  // canonical, hreflang or social image (no localhost, no invented domain).
+  if (!siteUrl.configured) {
+    return {
+      ...base,
+      openGraph: { type: "website", title, description, siteName: siteConfig.name, locale: ogLocale[locale] },
+    };
+  }
+
+  const image = { url: `/og/${locale}.png`, width: OG_SIZE.width, height: OG_SIZE.height, alt: ogAlt };
+  return {
+    ...base,
+    metadataBase: new URL(siteUrl.origin),
+    alternates: pageAlternates(siteUrl.origin, locale),
     openGraph: {
       type: "website",
       title,
-      description: t("description"),
+      description,
       siteName: siteConfig.name,
-      locale: locale === "pt" ? "pt_BR" : "en_US",
+      url: localePath(locale),
+      locale: ogLocale[locale],
+      alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => ogLocale[l]),
+      images: [image],
     },
-    ...alternates,
+    twitter: { card: "summary_large_image", title, description, images: [image] },
   };
 }
 

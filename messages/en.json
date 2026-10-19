@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "{name} | Senior Full Stack Software Engineer",
-    "description": "Portfolio of a Senior Full Stack Software Engineer building scalable applications, real-time integrations, and thoughtful digital experiences."
+    "description": "Senior Full Stack Software Engineer with 10+ years of experience building scalable applications, real-time integrations, enterprise platforms and custom software solutions.",
+    "ogTagline": "Building complex systems. Making them feel simple."
   },
   "common": {
     "skipToContent": "Skip to content",
@@ -232,11 +233,23 @@
     "eyebrow": "05 / Contact",
     "title": "Let's build something.",
     "description": "The best way to reach me is by email or LinkedIn.",
+    "resume": {
+      "label": "Download Resume",
+      "meta": "PDF · English"
+    },
     "labels": {
       "linkedin": "LinkedIn",
       "github": "GitHub",
       "email": "Email"
     }
+  },
+  "resume": {
+    "title": "{name} — Resume",
+    "summary": "Summary",
+    "experience": "Experience",
+    "skills": "Technical skills",
+    "education": "Education",
+    "technologies": "Technologies"
   },
   "footer": {
     "builtWith": "Built with Next.js, TypeScript and Tailwind CSS.",

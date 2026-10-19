@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local reference material (not versioned)
 /ref/
+
+# private working files (e.g. original resume): never versioned
+/private/

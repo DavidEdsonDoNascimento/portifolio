@@ -1,8 +1,11 @@
 import { defineRouting } from "next-intl/routing";
+import { defaultLocale, locales } from "@/lib/locales";
+
+export { htmlLang, intlLocale, type Locale } from "@/lib/locales";
 
 export const routing = defineRouting({
-  locales: ["en", "pt"],
-  defaultLocale: "en",
+  locales,
+  defaultLocale,
   // `/` is English, `/pt` is Brazilian Portuguese.
   localePrefix: "as-needed",
   // The URL is the single source of truth: no Accept-Language detection and
@@ -13,11 +16,3 @@ export const routing = defineRouting({
   // internal host.
   alternateLinks: false,
 });
-
-export type Locale = (typeof routing.locales)[number];
-
-/** Value for the <html lang> attribute. */
-export const htmlLang: Record<Locale, string> = { en: "en", pt: "pt-BR" };
-
-/** Locale tag used by Intl formatters. */
-export const intlLocale: Record<Locale, string> = { en: "en-US", pt: "pt-BR" };

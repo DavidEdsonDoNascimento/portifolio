@@ -1,7 +1,9 @@
-import { ArrowUpRight, BriefcaseBusiness, GitBranch, Mail } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { ArrowUpRight, BriefcaseBusiness, Download, GitBranch, Mail } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { buttonClassName } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/config/site";
+import type { Locale } from "@/i18n/routing";
 
 const icons = {
   linkedin: BriefcaseBusiness,
@@ -12,6 +14,7 @@ const icons = {
 export function Contact() {
   const t = useTranslations("contact");
   const tCommon = useTranslations("common");
+  const locale = useLocale() as Locale;
 
   return (
     <section
@@ -56,6 +59,17 @@ export function Contact() {
             );
           })}
         </ul>
+
+        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <a
+            href={siteConfig.resume[locale]}
+            download
+            className={buttonClassName("ghost")}
+          >
+            <Download size={16} aria-hidden /> {t("resume.label")}
+          </a>
+          <span className="text-muted font-mono text-xs">{t("resume.meta")}</span>
+        </div>
       </div>
     </section>
   );

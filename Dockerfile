@@ -15,6 +15,10 @@ RUN pnpm install --frozen-lockfile
 # 2) Production build
 FROM base AS builder
 ENV NEXT_TELEMETRY_DISABLED=1
+# Public site URL (e.g. https://yourdomain.com). Read at BUILD time to generate
+# canonical/hreflang, sitemap and robots; empty keeps the site noindex.
+ARG NEXT_PUBLIC_SITE_URL=""
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN pnpm build
