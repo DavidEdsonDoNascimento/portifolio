@@ -13,10 +13,32 @@ export const siteConfig = {
     { label: "Contact", href: "#contact" },
   ],
   stack: ["TypeScript", "React", "Next.js", "Node.js", "NestJS", "Docker"],
-  // Fill in `href` when the real links are available. `null` renders a placeholder.
+  owner: {
+    fullName: "David Edson do Nascimento",
+    location: "Santa Catarina, Brazil",
+    experience: "10+ years",
+  },
   contact: [
-    { id: "github", label: "GitHub", href: null as string | null },
-    { id: "linkedin", label: "LinkedIn", href: null as string | null },
-    { id: "email", label: "Email", href: null as string | null },
+    {
+      id: "linkedin",
+      label: "LinkedIn",
+      value: "in/david-nascimento-05989a177",
+      href: "https://linkedin.com/in/david-nascimento-05989a177",
+      external: true,
+    },
+    {
+      id: "github",
+      label: "GitHub",
+      value: "DavidEdsonDoNascimento",
+      href: "https://github.com/DavidEdsonDoNascimento",
+      external: true,
+    },
+    {
+      id: "email",
+      label: "Email",
+      value: "david.contato.tec@gmail.com",
+      href: "mailto:david.contato.tec@gmail.com",
+      external: false,
+    },
   ],
 } as const;

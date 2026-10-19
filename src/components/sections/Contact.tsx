@@ -1,6 +1,12 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, GitBranch, Mail } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/config/site";
+
+const icons = {
+  linkedin: BriefcaseBusiness,
+  github: GitBranch,
+  email: Mail,
+} as const;
 
 export function Contact() {
   return (
@@ -14,27 +20,35 @@ export function Contact() {
           id="contact-title"
           eyebrow="05 / Contact"
           title="Let's build something."
-          description="Links will be added soon."
+          description="The best way to reach me is by email or LinkedIn."
         />
         <ul className="grid gap-4 sm:grid-cols-3">
-          {siteConfig.contact.map((item) => (
-            <li key={item.id}>
-              {item.href ? (
+          {siteConfig.contact.map((item) => {
+            const Icon = icons[item.id];
+            return (
+              <li key={item.id}>
                 <a
                   href={item.href}
-                  className="border-border bg-surface hover:border-primary/50 flex items-center justify-between rounded-2xl border p-6 transition-all duration-200 motion-safe:hover:-translate-y-0.5"
+                  {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="border-border bg-surface hover:border-primary/50 group flex h-full flex-col justify-between gap-8 rounded-2xl border p-6 transition-all duration-200 motion-safe:hover:-translate-y-0.5"
                 >
-                  <span className="font-display text-lg font-semibold">{item.label}</span>
-                  <ArrowUpRight size={18} className="text-primary" aria-hidden />
+                  <div className="flex items-center justify-between">
+                    <Icon size={20} className="text-primary" aria-hidden />
+                    <ArrowUpRight
+                      size={18}
+                      className="text-muted group-hover:text-primary transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden
+                    />
+                  </div>
+                  <div>
+                    <p className="font-display text-lg font-semibold">{item.label}</p>
+                    <p className="text-muted mt-1 font-mono text-xs break-all">{item.value}</p>
+                  </div>
+                  {item.external ? <span className="sr-only">(opens in a new tab)</span> : null}
                 </a>
-              ) : (
-                <div className="border-border bg-surface flex items-center justify-between rounded-2xl border border-dashed p-6">
-                  <span className="font-display text-lg font-semibold">{item.label}</span>
-                  <span className="text-muted font-mono text-xs">Coming soon</span>
-                </div>
-              )}
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
