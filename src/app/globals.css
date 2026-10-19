@@ -10,6 +10,7 @@
   --color-foreground: #f3f6f1;
   --color-muted: #a8b3ab;
   --color-border: #293336;
+  --color-danger: #f07178;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif,
@@ -112,4 +113,52 @@
   3% { opacity: 1; }
   22% { opacity: 0; }
   100% { opacity: 0; }
+}
+
+/* Packet Rush — minigame. Motion is opt-in: without it the game stays fully
+   usable (feedback text persists, the timer bar steps once per second). */
+.pr-fill {
+  transform: scaleX(var(--pr-scale, 1));
+  transform-origin: left;
+}
+.pr-flash {
+  opacity: 0;
+}
+.pr-fire {
+  opacity: 0;
+  stroke-dasharray: 4 400;
+  stroke-dashoffset: 4;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pr-fill {
+    animation: pr-drain var(--pr-duration, 15s) linear forwards;
+  }
+  .pr-enter {
+    animation: pr-enter 180ms ease-out both;
+  }
+  .pr-flash {
+    animation: pr-flash 520ms ease-out both;
+  }
+  .pr-fire {
+    animation: pr-fire 360ms ease-out both;
+  }
+}
+
+@keyframes pr-drain {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+@keyframes pr-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pr-flash {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes pr-fire {
+  from { opacity: 1; stroke-dashoffset: 4; }
+  to { opacity: 1; stroke-dashoffset: -104; }
 }

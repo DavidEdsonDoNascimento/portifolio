@@ -1,8 +1,11 @@
 import type { Project } from "@/types/content";
 
+/** Stable anchor id of the Videosoft card (used by "#id" links, e.g. from the Lab). */
+export const REALTIME_PROJECT_ID = "realtime-integration-engine";
+
 export const projects: Project[] = [
   {
-    id: "realtime-integration-engine",
+    id: REALTIME_PROJECT_ID,
     category: "Enterprise Systems / Real-Time Integrations",
     title: "Real-Time Integration Engine",
     context: "Videosoft Soluções em Autoatendimento",

@@ -16,9 +16,13 @@ const variants = {
     "border border-border bg-surface/40 text-foreground hover:border-primary/60 hover:bg-surface hover:text-primary",
 } as const;
 
+export function buttonClassName(variant: keyof typeof variants = "primary") {
+  return `${base} ${variants[variant]}`;
+}
+
 export function ButtonLink({ href, variant = "primary", children }: Props) {
   return (
-    <a href={href} className={`${base} ${variants[variant]}`}>
+    <a href={href} className={buttonClassName(variant)}>
       {children}
     </a>
   );

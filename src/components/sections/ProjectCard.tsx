@@ -9,6 +9,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article
+      id={project.id}
       aria-labelledby={titleId}
       className={`border-border bg-surface hover:border-primary/40 group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 motion-safe:hover:-translate-y-1 hover:shadow-[0_20px_40px_-24px_color-mix(in_srgb,var(--color-primary)_30%,transparent)] ${
         featured ? "lg:flex-row" : ""

@@ -28,6 +28,7 @@ pnpm dev        # http://localhost:3000
 | `pnpm start`     | Run the production build           |
 | `pnpm lint`      | ESLint                             |
 | `pnpm typecheck` | Route types + `tsc --noEmit`       |
+| `pnpm test`      | Packet Rush rules (`node --test`, Node 22.18+) |
 
 ## Docker
 
@@ -50,9 +51,10 @@ src/
   app/                 layout, page, globals.css (tokens), api/health, icon.svg
   components/
     layout/            Header (client, mobile menu), Footer
-    sections/          Hero, Projects, Experience, InteractiveLab, About, Contact
+    sections/          Hero, Projects, Experience, InteractiveLab (Packet Rush), About, Contact
     ui/                ButtonLink, SectionHeading, Badge
   config/site.ts       site name, nav, contact links
+  lib/                 pure game rules (packet-rush.ts) and their tests
   data/                typed placeholder content (projects, experience)
   types/               shared content types
 public/                assets used by the site
