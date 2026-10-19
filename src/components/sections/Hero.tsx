@@ -1,9 +1,12 @@
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { siteConfig } from "@/config/site";
 import { ArchitecturePanel } from "./ArchitecturePanel";
 
 export function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <section
       id="top"
@@ -22,27 +25,26 @@ export function Hero() {
         <div>
           <p className="border-border bg-surface/60 text-muted mb-7 inline-flex items-center gap-2.5 rounded-full border py-1.5 pr-4 pl-3 font-mono text-xs tracking-wide">
             <span className="bg-primary size-1.5 rounded-full" aria-hidden="true" />
-            {siteConfig.title}
+            {t("role")}
           </p>
 
           <h1
             id="hero-title"
             className="font-display text-[clamp(2.5rem,9vw,3.9rem)] lg:text-[clamp(2.6rem,4.9vw,3.9rem)] leading-[1.05] font-semibold tracking-[-0.035em]"
           >
-            <span className="block text-balance">Building complex systems.</span>{" "}
+            <span className="block text-balance">{t("titleLine1")}</span>{" "}
             <span className="text-muted block text-balance">
-              Making them feel <span className="text-primary">simple.</span>
+              {t("titleLine2")} <span className="text-primary">{t("titleAccent")}</span>
             </span>
           </h1>
 
           <p className="text-muted mt-7 max-w-lg text-lg leading-relaxed text-pretty">
-            I build scalable applications, real-time integrations, and thoughtful digital
-            experiences.
+            {t("description")}
           </p>
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href="#work">
-              Explore My Work
+              {t("exploreWork")}
               <ArrowRight
                 size={16}
                 className="transition-transform duration-200 group-hover:translate-x-0.5"
@@ -50,15 +52,15 @@ export function Hero() {
               />
             </ButtonLink>
             <ButtonLink href="#contact" variant="ghost">
-              Get in Touch
+              {t("getInTouch")}
             </ButtonLink>
           </div>
 
           <div className="mt-12">
             <p className="text-muted mb-3 font-mono text-[11px] tracking-widest uppercase">
-              Core stack
+              {t("coreStack")}
             </p>
-            <ul className="flex flex-wrap gap-2" aria-label="Core technologies">
+            <ul className="flex flex-wrap gap-2" aria-label={t("coreTechnologies")}>
               {siteConfig.stack.map((item) => (
                 <li
                   key={item}

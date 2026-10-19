@@ -1,4 +1,5 @@
 import { ArrowUpRight, BriefcaseBusiness, GitBranch, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/config/site";
 
@@ -9,6 +10,9 @@ const icons = {
 } as const;
 
 export function Contact() {
+  const t = useTranslations("contact");
+  const tCommon = useTranslations("common");
+
   return (
     <section
       id="contact"
@@ -18,9 +22,9 @@ export function Contact() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           id="contact-title"
-          eyebrow="05 / Contact"
-          title="Let's build something."
-          description="The best way to reach me is by email or LinkedIn."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description")}
         />
         <ul className="grid gap-4 sm:grid-cols-3">
           {siteConfig.contact.map((item) => {
@@ -41,10 +45,12 @@ export function Contact() {
                     />
                   </div>
                   <div>
-                    <p className="font-display text-lg font-semibold">{item.label}</p>
+                    <p className="font-display text-lg font-semibold">{t(`labels.${item.id}`)}</p>
                     <p className="text-muted mt-1 font-mono text-xs break-all">{item.value}</p>
                   </div>
-                  {item.external ? <span className="sr-only">(opens in a new tab)</span> : null}
+                  {item.external ? (
+                    <span className="sr-only">{tCommon("opensInNewTab")}</span>
+                  ) : null}
                 </a>
               </li>
             );

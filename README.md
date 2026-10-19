@@ -6,7 +6,7 @@ Personal portfolio of a Senior Full Stack Software Engineer. This is the **found
 
 - Next.js 16 (App Router) · React 19 · TypeScript (strict)
 - Tailwind CSS 4 (design tokens in `src/app/globals.css`)
-- Lucide React (icons) · ESLint
+- next-intl (EN / PT-BR) · Lucide React (icons) · ESLint
 - Fonts via `next/font`: Space Grotesk (headings), Inter (body), JetBrains Mono (tech details)
 
 ## Requirements
@@ -28,7 +28,20 @@ pnpm dev        # http://localhost:3000
 | `pnpm start`     | Run the production build           |
 | `pnpm lint`      | ESLint                             |
 | `pnpm typecheck` | Route types + `tsc --noEmit`       |
-| `pnpm test`      | Packet Rush rules (`node --test`, Node 22.18+) |
+| `pnpm test`      | Packet Rush rules + translation integrity (`node --test`, Node 22.18+) |
+
+## Internationalization
+
+English is the default language (`/`); Brazilian Portuguese lives at `/pt`. There is no
+browser-language detection and no cookie: the URL is the source of truth. `/api/health` is not
+prefixed.
+
+- Copy lives in `messages/en.json` and `messages/pt.json` (same keys; `pnpm test` fails if they diverge).
+- Structural data (ids, URLs, companies, technologies, dates) stays in `src/data/` and is shared;
+  texts are looked up by id (e.g. `projects.items.<id>.title`).
+- Routing: `src/i18n/routing.ts`, `src/proxy.ts` (Next 16 replacement for `middleware.ts`).
+- Optional: set `NEXT_PUBLIC_SITE_URL` at build time once the domain exists to emit `canonical` and
+  `hreflang` metadata. Nothing is assumed until then.
 
 ## Docker
 
@@ -48,15 +61,17 @@ Planned setup: Git repository → Build Pack **Dockerfile** → internal port **
 
 ```
 src/
-  app/                 layout, page, globals.css (tokens), api/health, icon.svg
+  app/[locale]/        localized layout + page; globals.css (tokens), api/health, icon.svg
   components/
     layout/            Header (client, mobile menu), Footer
     sections/          Hero, Projects, Experience, InteractiveLab (Packet Rush), About, Contact
     ui/                ButtonLink, SectionHeading, Badge
-  config/site.ts       site name, nav, contact links
+  config/site.ts       site name, nav, contact links (language-independent)
+  i18n/                routing, request config, navigation helpers (next-intl)
   lib/                 pure game rules (packet-rush.ts) and their tests
   data/                typed placeholder content (projects, experience)
   types/               shared content types
+messages/              en.json, pt.json
 public/                assets used by the site
 ref/                   local reference only (see below)
 ```
@@ -67,8 +82,6 @@ ref/                   local reference only (see below)
 
 ## Next steps
 
-1. Real content: experience, projects/case studies, about, contact links (`src/config/site.ts`).
-2. Visual refinement and motion (evaluate Motion for React).
-3. *Packet Rush Mini* in the Interactive Lab.
-4. English/Portuguese i18n.
-5. Open Graph image and `metadataBase` once the domain is defined.
+1. SEO: Open Graph image, sitemap and canonical/hreflang once the domain is defined.
+2. Case-study pages for the selected projects.
+3. Visual refinement and motion.

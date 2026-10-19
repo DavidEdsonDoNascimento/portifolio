@@ -1,12 +1,17 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { siteConfig } from "@/config/site";
+import { getPathname } from "@/i18n/navigation";
+import { htmlLang, routing, type Locale } from "@/i18n/routing";
 
-const sectionIds = siteConfig.nav.map((item) => item.href.slice(1));
+const sectionIds = siteConfig.nav.map((item) => item.id);
 
 export function Header() {
+  const t = useTranslations("navigation");
+  const locale = useLocale() as Locale;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -50,8 +55,51 @@ export function Header() {
     };
   }, []);
 
+  // Switch language keeping the visitor's place: reuse the URL hash, or fall
+  // back to the section currently being read. Changing the [locale] root layout
+  // is a full page load anyway, so we navigate to `<localized path><hash>` and
+  // let the browser scroll to the section. Without JS the plain links still
+  // work (they point at `/` and `/pt`).
+  const switchLocale = (event: MouseEvent, target: Locale) => {
+    event.preventDefault();
+    if (target === locale) return;
+    const hash = window.location.hash || (active ? `#${active}` : "");
+    setOpen(false);
+    window.location.assign(getPathname({ href: "/", locale: target }) + hash);
+  };
+
+  const switcher = (
+    <div
+      role="group"
+      aria-label={t("language.label")}
+      className="border-border bg-background/60 flex items-center rounded-full border p-0.5 font-mono text-[11px]"
+    >
+      {routing.locales.map((code) => {
+        const current = code === locale;
+        return (
+          <a
+            key={code}
+            href={getPathname({ href: "/", locale: code })}
+            lang={htmlLang[code]}
+            hrefLang={htmlLang[code]}
+            aria-current={current ? "true" : undefined}
+            onClick={(event) => switchLocale(event, code)}
+            className={`rounded-full px-3 py-2 tracking-wider transition-colors duration-200 ${
+              current
+                ? "bg-primary/15 text-primary"
+                : "text-muted hover:text-foreground hover:bg-surface-elevated"
+            }`}
+          >
+            <span aria-hidden="true">{code.toUpperCase()}</span>
+            <span className="sr-only">{t(`language.${code}`)}</span>
+          </a>
+        );
+      })}
+    </div>
+  );
+
   const linkClass = (id: string) =>
-    `rounded-full px-4 py-2 text-sm transition-colors duration-200 hover:bg-surface-elevated hover:text-foreground ${
+    `rounded-full px-3 xl:px-4 py-2 text-sm transition-colors duration-200 hover:bg-surface-elevated hover:text-foreground ${
       active === id ? "text-foreground" : "text-muted"
     }`;
 
@@ -62,7 +110,7 @@ export function Header() {
           href="#top"
           className="group flex items-center gap-2.5 rounded-full py-1 pr-2"
           onClick={() => setOpen(false)}
-          aria-label={`${siteConfig.name} — back to top`}
+          aria-label={t("backToTop", { name: siteConfig.name })}
         >
           <span
             className="bg-background border-border text-primary group-hover:border-primary/60 inline-flex size-8 items-center justify-center rounded-full border transition-colors duration-200"
@@ -77,31 +125,31 @@ export function Header() {
           </span>
         </a>
 
-        <nav aria-label="Primary" className="absolute left-1/2 hidden -translate-x-1/2 lg:block">
+        <nav aria-label={t("primary")} className="absolute left-1/2 hidden -translate-x-1/2 lg:block">
           <ul className="flex items-center gap-0.5">
-            {siteConfig.nav.map((item) => {
-              const id = item.href.slice(1);
-              return (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    className={linkClass(id)}
-                    aria-current={active === id ? "location" : undefined}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              );
-            })}
+            {siteConfig.nav.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={item.href}
+                  className={linkClass(item.id)}
+                  aria-current={active === item.id ? "location" : undefined}
+                >
+                  {t(item.id)}
+                </a>
+              </li>
+            ))}
           </ul>
         </nav>
 
-        <a
-          href="#contact"
-          className="bg-primary text-background hover:bg-primary/90 hidden rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:shadow-[0_0_0_4px_color-mix(in_srgb,var(--color-primary)_18%,transparent)] lg:inline-block"
-        >
-          Get in Touch
-        </a>
+        <div className="hidden items-center gap-3 lg:flex">
+          {switcher}
+          <a
+            href="#contact"
+            className="bg-primary text-background hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-all duration-200 hover:shadow-[0_0_0_4px_color-mix(in_srgb,var(--color-primary)_18%,transparent)]"
+          >
+            {t("getInTouch")}
+          </a>
+        </div>
 
         <button
           ref={toggleRef}
@@ -109,7 +157,7 @@ export function Header() {
           className="text-foreground hover:bg-surface-elevated inline-flex size-10 items-center justify-center rounded-full transition-colors duration-200 lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? t("closeMenu") : t("openMenu")}
           onClick={() => setOpen((value) => !value)}
         >
           {open ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
@@ -118,34 +166,37 @@ export function Header() {
         {open ? (
           <nav
             id="mobile-menu"
-            aria-label="Mobile"
+            aria-label={t("mobile")}
             className="border-border bg-surface absolute inset-x-0 top-full mt-2 rounded-3xl border p-3 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.7)] lg:hidden"
           >
             <ul className="flex flex-col gap-0.5">
-              {siteConfig.nav.map((item) => {
-                const id = item.href.slice(1);
-                return (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      className={`hover:bg-surface-elevated block rounded-2xl px-4 py-3 text-base transition-colors duration-200 ${
-                        active === id ? "text-primary" : "text-foreground"
-                      }`}
-                      aria-current={active === id ? "location" : undefined}
-                      onClick={() => setOpen(false)}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })}
+              {siteConfig.nav.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={item.href}
+                    className={`hover:bg-surface-elevated block rounded-2xl px-4 py-3 text-base transition-colors duration-200 ${
+                      active === item.id ? "text-primary" : "text-foreground"
+                    }`}
+                    aria-current={active === item.id ? "location" : undefined}
+                    onClick={() => setOpen(false)}
+                  >
+                    {t(item.id)}
+                  </a>
+                </li>
+              ))}
+              <li className="mt-2 flex items-center justify-between gap-3 px-1">
+                <span className="text-muted font-mono text-[11px] tracking-widest uppercase">
+                  {t("language.label")}
+                </span>
+                {switcher}
+              </li>
               <li className="mt-2">
                 <a
                   href="#contact"
                   className="bg-primary text-background hover:bg-primary/90 block rounded-full px-4 py-3 text-center text-base font-medium transition-colors"
                   onClick={() => setOpen(false)}
                 >
-                  Get in Touch
+                  {t("getInTouch")}
                 </a>
               </li>
             </ul>

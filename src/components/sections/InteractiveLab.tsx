@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PacketRush } from "./PacketRush";
 
 export function InteractiveLab() {
+  const t = useTranslations("lab");
+
   return (
     <section
       id="lab"
@@ -11,9 +14,9 @@ export function InteractiveLab() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           id="lab-title"
-          eyebrow="03 / Lab"
-          title="Interactive Lab"
-          description="A tiny interactive challenge inspired by real-time systems."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description")}
         />
         <div className="border-border bg-surface relative overflow-hidden rounded-2xl border">
           <div className="bg-grid pointer-events-none absolute inset-0 opacity-20" aria-hidden="true" />

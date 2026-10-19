@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import type { ProjectVisualKind } from "@/types/content";
 
@@ -18,11 +19,11 @@ const svgProps = {
 /* ---------- Integration engine ---------- */
 
 const flowNodes = [
-  { id: "partners", label: "Partners", sub: "3rd-party APIs", x: 16, y: 40, w: 112, h: 52, tone: "neutral", dashed: true, arrive: [] },
-  { id: "queue", label: "Queue", sub: "events", x: 184, y: 24, w: 112, h: 48, tone: "neutral", dashed: false, arrive: [0.67] },
-  { id: "engine", label: "Engine", sub: "integration bot", x: 184, y: 112, w: 112, h: 76, tone: "primary", dashed: false, arrive: [1.03, 4.29] },
-  { id: "admin", label: "Admin panel", sub: "configuration", x: 16, y: 208, w: 112, h: 52, tone: "neutral", dashed: false, arrive: [] },
-  { id: "pwa", label: "PWA", sub: "self-service", x: 352, y: 112, w: 112, h: 76, tone: "secondary", dashed: false, arrive: [1.54] },
+  { id: "partners", x: 16, y: 40, w: 112, h: 52, tone: "neutral", dashed: true, arrive: [] },
+  { id: "queue", x: 184, y: 24, w: 112, h: 48, tone: "neutral", dashed: false, arrive: [0.67] },
+  { id: "engine", x: 184, y: 112, w: 112, h: 76, tone: "primary", dashed: false, arrive: [1.03, 4.29] },
+  { id: "admin", x: 16, y: 208, w: 112, h: 52, tone: "neutral", dashed: false, arrive: [] },
+  { id: "pwa", x: 352, y: 112, w: 112, h: 76, tone: "secondary", dashed: false, arrive: [1.54] },
 ] as const;
 
 const flowLinks = [
@@ -57,6 +58,8 @@ const flowTone = {
 } as const;
 
 function IntegrationVisual() {
+  const t = useTranslations("projects.visual");
+
   return (
     <svg {...svgProps}>
       <defs>
@@ -66,20 +69,23 @@ function IntegrationVisual() {
       </defs>
 
       {flowLinks.map((link) => {
-        const t = flowTone[link.tone];
+        const tone = flowTone[link.tone];
         const style: Delay = { "--delay": `${link.delay}s` };
         return (
           <g key={link.id} fill="none" strokeLinecap="round">
             <path d={link.d} className="stroke-muted/40" strokeWidth="1.5" strokeDasharray="3 5" markerEnd="url(#pv-arrow)" />
-            <path d={link.d} pathLength={link.len} className={`arch-tail ${t.tail}`} strokeWidth="2" strokeLinecap="butt" style={style} />
-            <path d={link.d} pathLength={link.len} className={`arch-packet ${t.packet}`} strokeWidth="6" style={style} />
+            <path d={link.d} pathLength={link.len} className={`arch-tail ${tone.tail}`} strokeWidth="2" strokeLinecap="butt" style={style} />
+            <path d={link.d} pathLength={link.len} className={`arch-packet ${tone.packet}`} strokeWidth="6" style={style} />
           </g>
         );
       })}
 
       <g fontFamily="var(--font-jetbrains-mono), monospace">
         {flowNodes.map((node) => {
-          const t = flowTone[node.tone];
+          const tone = flowTone[node.tone];
+          const label = t(`${node.id}.label`);
+          const sub = t(`${node.id}.sub`);
+          const long = label.length > 9;
           const cx = node.x + node.w / 2;
           const cy = node.y + node.h / 2;
           return (
@@ -92,7 +98,7 @@ function IntegrationVisual() {
                 rx="12"
                 strokeWidth="1.25"
                 strokeDasharray={node.dashed ? "4 4" : undefined}
-                className={`fill-surface-elevated ${t.body}`}
+                className={`fill-surface-elevated ${tone.body}`}
               />
               {node.arrive.map((at) => (
                 <rect
@@ -103,18 +109,18 @@ function IntegrationVisual() {
                   height={node.h}
                   rx="12"
                   strokeWidth="1.5"
-                  className={`arch-glow ${t.glow}`}
+                  className={`arch-glow ${tone.glow}`}
                   style={{ "--delay": `${at}s` } as Delay}
                 />
               ))}
-              <text x={cx} y={cy - 1} textAnchor="middle" fontSize="15" fontWeight="500" className={`@max-sm:hidden ${t.text}`}>
-                {node.label}
+              <text x={cx} y={cy - 1} textAnchor="middle" fontSize={long ? 13 : 15} fontWeight="500" className={`@max-sm:hidden ${tone.text}`}>
+                {label}
               </text>
               <text x={cx} y={cy + 16} textAnchor="middle" fontSize="11" className="fill-muted @max-sm:hidden">
-                {node.sub}
+                {sub}
               </text>
-              <text x={cx} y={cy + 6} textAnchor="middle" fontSize="17" fontWeight="500" className={`@sm:hidden ${t.text}`}>
-                {node.label}
+              <text x={cx} y={cy + 6} textAnchor="middle" fontSize={long ? 14.5 : 17} fontWeight="500" className={`@sm:hidden ${tone.text}`}>
+                {label}
               </text>
             </g>
           );

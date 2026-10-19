@@ -1,7 +1,15 @@
+/**
+ * Structural content only (ids, URLs, companies, technologies, dates).
+ * Every translatable string lives in /messages/<locale>.json under a key
+ * derived from the entry `id`.
+ */
+
+/** A technology name, or a key into `messages.tech` when the label is translated. */
+export type TechItem = string | { key: string };
+
 export type ProjectVisualKind = "integration" | "orders" | "website";
 
 export type ProjectLink = {
-  label: string;
   href: string;
   /** "private" links point to an application that requires authentication. */
   kind: "public" | "private";
@@ -9,16 +17,9 @@ export type ProjectLink = {
 
 export type Project = {
   id: string;
-  category: string;
-  title: string;
-  /** Short line about where/how the work was done. */
-  context: string;
-  description: string;
-  highlights: string[];
-  /** Only technologies confirmed for this project. */
-  technologies: string[];
   visual: ProjectVisualKind;
-  visualCaption: string;
+  /** Only technologies confirmed for this project. */
+  technologies: TechItem[];
   featured?: boolean;
   link?: ProjectLink;
 };
@@ -26,22 +27,21 @@ export type Project = {
 export type ExperienceEntry = {
   id: string;
   company: string;
-  project?: string;
-  role: string;
-  period: string;
-  highlights: string[];
-  stack?: string[];
+  /** "YYYY-MM" */
+  period: { start: string; end: string };
+  stack?: TechItem[];
 };
 
 export type SkillGroup = {
   id: string;
-  title: string;
-  items: string[];
+  items: TechItem[];
 };
 
 export type EducationEntry = {
   id: string;
-  degree: string;
   institution: string;
-  period: string;
+  /** Exactly one of the two is set. */
+  completedYear?: number;
+  /** "YYYY-MM" */
+  inProgressSince?: string;
 };

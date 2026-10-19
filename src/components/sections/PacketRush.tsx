@@ -1,19 +1,19 @@
 "use client";
 
 import { ArrowRight, Check, Play, RotateCcw, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useReducer, useRef, type CSSProperties } from "react";
 import { buttonClassName } from "@/components/ui/ButtonLink";
 import { REALTIME_PROJECT_ID } from "@/data/projects";
 import {
-  EVENT_DESCRIPTIONS,
   EVENT_TYPES,
   EVENTS_PER_ROUND,
   MAX_SCORE,
   POINTS_CORRECT,
+  POINTS_WRONG,
   ROUND_SECONDS,
   ROUTES,
   SERVICES,
-  SERVICE_DESCRIPTIONS,
   createRound,
   currentEvent,
   initialState,
@@ -26,7 +26,6 @@ const LOW_TIME_SECONDS = 5;
 // Connector paths drawn from the event (top centre) to each destination column.
 const CONNECTORS = ["M150 0 C150 22 50 22 50 44", "M150 0 V44", "M150 0 C150 22 250 22 250 44"];
 
-const statusLabel = { idle: "Standby", playing: "Live", finished: "Ended" } as const;
 const statusDot = { idle: "bg-muted", playing: "bg-primary", finished: "bg-secondary" } as const;
 
 function isEditable(target: EventTarget | null) {
@@ -37,6 +36,7 @@ function isEditable(target: EventTarget | null) {
 }
 
 export function PacketRush() {
+  const t = useTranslations("packetRush");
   const [state, dispatch] = useReducer(reducer, initialState);
   const deadline = useRef(0);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -86,15 +86,15 @@ export function PacketRush() {
   let announcement = "";
   if (status === "playing" && event) {
     const lead = !feedback
-      ? "Game started. "
+      ? t("announce.started")
       : feedback.kind === "correct"
-        ? `Correct, plus ${POINTS_CORRECT} points. `
-        : `Wrong. ${feedback.event} goes to ${feedback.expected}. `;
-    announcement = `${lead}Incoming event: ${event}. ${EVENT_DESCRIPTIONS[event]}`;
+        ? t("announce.correct", { points: POINTS_CORRECT })
+        : t("announce.wrong", { event: feedback.event, service: feedback.expected });
+    announcement = `${lead} ${t("announce.incoming", { event, description: t(`events.${event}`) })}`;
   }
 
   return (
-    <div role="region" aria-label="Packet Rush mini game">
+    <div role="region" aria-label={t("region")}>
       <div className="border-border flex items-center justify-between gap-3 border-b px-5 py-3 sm:px-7">
         <div className="flex items-center gap-3" aria-hidden="true">
           <span className="flex items-center gap-2 max-sm:hidden">
@@ -106,8 +106,8 @@ export function PacketRush() {
         </div>
         <p className="border-border text-muted inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px]">
           <span className={`size-1.5 rounded-full ${statusDot[status]}`} aria-hidden="true" />
-          <span className="sr-only">Status: </span>
-          {statusLabel[status]}
+          <span className="sr-only">{t("status.label")} </span>
+          {t(`status.${status}`)}
         </p>
       </div>
 
@@ -119,26 +119,26 @@ export function PacketRush() {
         {status === "idle" && <Intro onStart={start} />}
 
         {status === "playing" && event && (
-          <div ref={stageRef} tabIndex={-1} role="group" aria-label="Game in progress" className="outline-none">
+          <div ref={stageRef} tabIndex={-1} role="group" aria-label={t("playing.groupLabel")} className="outline-none">
             <dl className="mx-auto grid max-w-xl grid-cols-3 gap-3 text-center">
               <div>
-                <dt className="text-muted font-mono text-[11px] tracking-widest uppercase">Score</dt>
+                <dt className="text-muted font-mono text-[11px] tracking-widest uppercase">{t("playing.score")}</dt>
                 <dd className="font-display text-3xl font-semibold tabular-nums">{state.score}</dd>
               </div>
               <div>
-                <dt className="text-muted font-mono text-[11px] tracking-widest uppercase">Time</dt>
+                <dt className="text-muted font-mono text-[11px] tracking-widest uppercase">{t("playing.time")}</dt>
                 <dd
                   className={`font-display text-3xl font-semibold tabular-nums ${
                     state.secondsLeft <= LOW_TIME_SECONDS ? "text-danger" : ""
                   }`}
                 >
-                  <span role="timer" aria-label="Seconds remaining">
-                    {state.secondsLeft}s
+                  <span role="timer" aria-label={t("playing.timerLabel")}>
+                    {t("playing.seconds", { seconds: state.secondsLeft })}
                   </span>
                 </dd>
               </div>
               <div>
-                <dt className="text-muted font-mono text-[11px] tracking-widest uppercase">Routed</dt>
+                <dt className="text-muted font-mono text-[11px] tracking-widest uppercase">{t("playing.routed")}</dt>
                 <dd className="font-display text-3xl font-semibold tabular-nums">
                   {state.answered}/{EVENTS_PER_ROUND}
                 </dd>
@@ -160,12 +160,12 @@ export function PacketRush() {
                 className="pr-enter border-border bg-surface-elevated rounded-2xl border px-5 py-6 text-center"
               >
                 <p className="text-muted font-mono text-[11px] tracking-widest uppercase">
-                  Incoming event
+                  {t("playing.incoming")}
                 </p>
                 <p className="text-primary mt-2 font-mono text-2xl font-medium break-words sm:text-3xl">
                   {event}
                 </p>
-                <p className="text-muted mt-2 text-sm">{EVENT_DESCRIPTIONS[event]}</p>
+                <p className="text-muted mt-2 text-sm">{t(`events.${event}`)}</p>
               </div>
 
               <div className="mt-3 min-h-6 text-center text-sm" aria-hidden="true">
@@ -178,12 +178,16 @@ export function PacketRush() {
                   >
                     {feedback.kind === "correct" ? (
                       <>
-                        <Check size={16} /> Correct +{POINTS_CORRECT}
+                        <Check size={16} /> {t("feedback.correct", { points: POINTS_CORRECT })}
                       </>
                     ) : (
                       <>
-                        <X size={16} /> Not quite: {feedback.event} goes to {feedback.expected}
-                        {feedback.delta < 0 ? ` (${feedback.delta})` : ""}
+                        <X size={16} />{" "}
+                        {t(feedback.delta < 0 ? "feedback.wrongPenalty" : "feedback.wrong", {
+                          event: feedback.event,
+                          service: feedback.expected,
+                          delta: feedback.delta,
+                        })}
                       </>
                     )}
                   </p>
@@ -224,28 +228,28 @@ export function PacketRush() {
         {status === "finished" && (
           <div ref={resultRef} tabIndex={-1} className="mx-auto max-w-2xl text-center outline-none">
             <p className="text-muted font-mono text-[11px] tracking-widest uppercase">
-              {state.result === "completed" ? "All events routed" : "Time ran out"}
+              {state.result === "completed" ? t("result.completedLabel") : t("result.timeoutLabel")}
             </p>
             <h3 className="font-display mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-              {state.result === "completed" ? "Network cleared" : "Time's up"}
+              {state.result === "completed" ? t("result.completedTitle") : t("result.timeoutTitle")}
             </h3>
 
             <p className="mt-6">
               <span className="font-display text-primary text-6xl font-semibold tabular-nums">
                 {state.score}
               </span>
-              <span className="text-muted ml-2 text-lg">/ {MAX_SCORE} points</span>
+              <span className="text-muted ml-2 text-lg">{t("result.points", { max: MAX_SCORE })}</span>
             </p>
 
             <dl className="mx-auto mt-6 grid max-w-sm grid-cols-2 gap-3 text-center">
               <div className="border-border bg-surface-elevated rounded-xl border p-4">
-                <dt className="text-muted text-xs">Routed correctly</dt>
+                <dt className="text-muted text-xs">{t("result.correct")}</dt>
                 <dd className="font-display mt-1 text-2xl font-semibold tabular-nums">
                   {state.correct} / {EVENTS_PER_ROUND}
                 </dd>
               </div>
               <div className="border-border bg-surface-elevated rounded-xl border p-4">
-                <dt className="text-muted text-xs">Events answered</dt>
+                <dt className="text-muted text-xs">{t("result.answered")}</dt>
                 <dd className="font-display mt-1 text-2xl font-semibold tabular-nums">
                   {state.answered} / {EVENTS_PER_ROUND}
                 </dd>
@@ -254,18 +258,17 @@ export function PacketRush() {
 
             <div className="mt-8 flex justify-center">
               <button type="button" onClick={start} className={buttonClassName("primary")}>
-                <RotateCcw size={16} aria-hidden /> Play Again
+                <RotateCcw size={16} aria-hidden /> {t("result.playAgain")}
               </button>
             </div>
 
             <div className="border-border mt-10 border-t pt-8">
               <p className="text-muted mx-auto max-w-md leading-relaxed text-pretty">
-                Enjoyed routing events? Explore how I worked with real-time integrations using
-                NestJS and WebSockets.
+                {t("result.promo")}
               </p>
               <div className="mt-5 flex justify-center">
                 <a href={`#${REALTIME_PROJECT_ID}`} className={buttonClassName("ghost")}>
-                  Explore the Real-Time Integration Project <ArrowRight size={16} aria-hidden />
+                  {t("result.projectLink")} <ArrowRight size={16} aria-hidden />
                 </a>
               </div>
             </div>
@@ -277,15 +280,18 @@ export function PacketRush() {
 }
 
 function Intro({ onStart }: { onStart: () => void }) {
+  const t = useTranslations("packetRush.intro");
+  const tEvents = useTranslations("packetRush.events");
+
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Packet Rush</h3>
-      <p className="text-primary mt-2 font-medium">Can you keep the network running?</p>
+      <h3 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{t("title")}</h3>
+      <p className="text-primary mt-2 font-medium">{t("subtitle")}</p>
       <p className="text-muted mt-3 leading-relaxed text-pretty">
-        Route incoming events to the correct service before time runs out.
+        {t("instruction")}
       </p>
 
-      <ul className="mt-8 space-y-3 text-left" aria-label="Routing rules">
+      <ul className="mt-8 space-y-3 text-left" aria-label={t("rulesLabel")}>
         {EVENT_TYPES.map((type) => (
           <li
             key={type}
@@ -296,26 +302,30 @@ function Intro({ onStart }: { onStart: () => void }) {
               <span className="text-muted mx-2" aria-hidden="true">
                 →
               </span>
-              <span className="sr-only"> goes to </span>
+              <span className="sr-only"> {t("goesTo")} </span>
               <span className="text-secondary">{ROUTES[type]}</span>
             </p>
-            <p className="text-muted text-sm">{EVENT_DESCRIPTIONS[type]}</p>
+            <p className="text-muted text-sm">{tEvents(type)}</p>
           </li>
         ))}
       </ul>
 
       <p className="text-muted mt-6 text-sm">
-        {EVENTS_PER_ROUND} events · {ROUND_SECONDS} seconds · +{POINTS_CORRECT} for a correct
-        route, −50 for a wrong one.
+        {t("summary", {
+          events: EVENTS_PER_ROUND,
+          seconds: ROUND_SECONDS,
+          correct: POINTS_CORRECT,
+          wrong: POINTS_WRONG,
+        })}
       </p>
 
       <div className="mt-7 flex justify-center">
         <button type="button" onClick={onStart} className={buttonClassName("primary")}>
-          <Play size={16} aria-hidden /> Start Game
+          <Play size={16} aria-hidden /> {t("start")}
         </button>
       </div>
       <p className="text-muted mt-4 text-xs max-sm:hidden">
-        Tip: during a round you can also press 1, 2 or 3.
+        {t("tip")}
       </p>
     </div>
   );
@@ -332,6 +342,7 @@ function DestinationButton({
   state: typeof initialState;
   onSelect: () => void;
 }) {
+  const t = useTranslations("packetRush.services");
   const fb = state.feedback;
   const chosen = fb?.chosen === service;
   const expectedMiss = fb?.kind === "wrong" && fb.expected === service;
@@ -350,7 +361,7 @@ function DestinationButton({
         {index + 1}
       </kbd>
       <span className="font-mono text-sm font-medium sm:text-base">{service}</span>
-      <span className="text-muted text-xs">{SERVICE_DESCRIPTIONS[service]}</span>
+      <span className="text-muted text-xs">{t(service)}</span>
 
       {fb && (chosen || expectedMiss) ? (
         <span

@@ -17,18 +17,6 @@ export const ROUTES: Record<EventType, Service> = {
   ORDER_CREATED: "ORDERS",
 };
 
-export const EVENT_DESCRIPTIONS: Record<EventType, string> = {
-  PRICE_UPDATE: "A product's price changed.",
-  STOCK_CHANGED: "An item's inventory changed.",
-  ORDER_CREATED: "A customer placed an order.",
-};
-
-export const SERVICE_DESCRIPTIONS: Record<Service, string> = {
-  PRICING: "prices",
-  STOCK: "inventory",
-  ORDERS: "orders",
-};
-
 export const EVENTS_PER_ROUND = 5;
 export const ROUND_SECONDS = 15;
 export const POINTS_CORRECT = 100;

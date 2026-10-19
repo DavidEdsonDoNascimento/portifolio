@@ -1,18 +1,11 @@
 import type { ExperienceEntry } from "@/types/content";
 
-// Reverse chronological order.
+// Reverse chronological order. Roles and highlights live in the messages.
 export const experience: ExperienceEntry[] = [
   {
     id: "altaa",
     company: "Altaa Digital",
-    project: "Pousti project",
-    role: "Senior Software Engineer — Backend",
-    period: "Aug 2026 – Oct 2026",
-    highlights: [
-      "Backend for an AI-powered content creation SaaS, working exclusively on the server side.",
-      "Evolved APIs and the contracts consumed by the frontend; fixed issues in agentic onboarding, persistence, visual generation and asset processing.",
-      "Worked on Meta/Instagram and Stripe integrations, incident investigation, observability and regression tests.",
-    ],
+    period: { start: "2026-08", end: "2026-10" },
     stack: [
       "Node.js",
       "TypeScript",
@@ -30,39 +23,19 @@ export const experience: ExperienceEntry[] = [
   {
     id: "antero",
     company: "Antero Sistemas",
-    project: "Independent projects",
-    role: "Software Consultant — Full Stack & Mobile",
-    period: "Jun 2026 – Aug 2026",
-    highlights: [
-      "Delivered web and mobile solutions on demand, covering architecture, implementation and system integration.",
-      "Lamp InPunto: defined the architecture and integration flows for the mobile application, connecting the software with custom laboratory hardware and coordinating technical decisions across a distributed team. An administrative management interface is being planned for the next version.",
-      "Built an order management platform in Next.js and the Antero Sistemas corporate website.",
-    ],
+    period: { start: "2026-06", end: "2026-08" },
     stack: ["Next.js", "React", "TypeScript"],
   },
   {
     id: "imagem",
     company: "Imagem Geosistemas",
-    project: "Petrobras projects",
-    role: "Full Stack Developer",
-    period: "Apr 2024 – May 2026",
-    highlights: [
-      "Built web applications and GIS solutions, including tools to map wells and occurrences on seismic lines.",
-      "Integrated mapping services, databases and APIs.",
-      "Took part in CI/CD and observability practices.",
-    ],
+    period: { start: "2024-04", end: "2026-05" },
     stack: ["React", "TypeScript", "JavaScript", "Go", "RabbitMQ", "Docker", "GIS", "REST APIs", "SQL"],
   },
   {
     id: "videosoft",
     company: "Videosoft",
-    role: "Full Stack Developer",
-    period: "Apr 2020 – Mar 2024",
-    highlights: [
-      "Evolved the VS Food PWA and led a squad technically.",
-      "Developed an integration bot with NestJS and WebSockets, plus integrations configurable from the admin panel and connections to third-party systems.",
-      "Automated testing with Jest and CI/CD practices.",
-    ],
+    period: { start: "2020-04", end: "2024-03" },
     stack: [
       "Angular",
       "PWA",
@@ -81,25 +54,13 @@ export const experience: ExperienceEntry[] = [
   {
     id: "efrete",
     company: "e-Frete",
-    role: "Full Stack Developer",
-    period: "Mar 2019 – Mar 2020",
-    highlights: [
-      "Built APIs and solutions for freight quotation, tracking and management.",
-      "Contributed to the Frete Cargas app (later Frete Mínimo) and to gamification features.",
-      "Improved database performance and stability.",
-    ],
+    period: { start: "2019-03", end: "2020-03" },
     stack: ["React", "Node.js", "TypeScript", "JavaScript", "C#/.NET", "Redis", "SQL", "REST APIs"],
   },
   {
     id: "nox",
     company: "NOX Gerenciamento e Monitoramento de Riscos",
-    role: "Software Developer — Intern to Junior",
-    period: "Jan 2016 – Mar 2019",
-    highlights: [
-      "Worked on ERP systems and route visualization tools, integrating location data.",
-      "Built a SOAP API and messaging with AWS SQS/SNS.",
-      "Developed a Java desktop application integrated with a biometric reader.",
-    ],
+    period: { start: "2016-01", end: "2019-03" },
     stack: ["PHP", "JavaScript", "Node.js", "React", "React Native", ".NET", "Java", "MySQL", "AWS"],
   },
 ];

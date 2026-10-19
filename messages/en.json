@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "title": "{name} | Senior Full Stack Software Engineer",
+    "description": "Portfolio of a Senior Full Stack Software Engineer building scalable applications, real-time integrations, and thoughtful digital experiences."
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "opensInNewTab": "(opens in a new tab)"
+  },
+  "navigation": {
+    "work": "Work",
+    "experience": "Experience",
+    "lab": "Lab",
+    "about": "About",
+    "contact": "Contact",
+    "getInTouch": "Get in Touch",
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "backToTop": "{name} — back to top",
+    "language": {
+      "label": "Language",
+      "en": "English",
+      "pt": "Português (Brasil)"
+    }
+  },
+  "hero": {
+    "role": "Senior Full Stack Software Engineer",
+    "titleLine1": "Building complex systems.",
+    "titleLine2": "Making them feel",
+    "titleAccent": "simple.",
+    "description": "I build scalable applications, real-time integrations, and thoughtful digital experiences.",
+    "exploreWork": "Explore My Work",
+    "getInTouch": "Get in Touch",
+    "coreStack": "Core stack",
+    "coreTechnologies": "Core technologies"
+  },
+  "architecture": {
+    "ariaLabel": "Diagram of a system architecture: a client request flows through a gateway to services and a database, and a real-time event returns to the client over WebSocket.",
+    "simulated": "simulated traffic",
+    "legendRequest": "request",
+    "legendEvent": "real-time event",
+    "nodes": {
+      "client": { "label": "Client", "sub": "web app" },
+      "gateway": { "label": "Gateway", "sub": "REST API" },
+      "realtime": { "label": "WebSocket", "sub": "real-time" },
+      "services": { "label": "Services", "sub": "business logic" },
+      "database": { "label": "Database", "sub": "SQL · NoSQL" }
+    }
+  },
+  "tech": {
+    "queuesMessaging": "Queues & messaging",
+    "automatedTesting": "Automated testing",
+    "integrationTesting": "Integration testing",
+    "observability": "Observability"
+  },
+  "projects": {
+    "eyebrow": "01 / Work",
+    "title": "Selected Work",
+    "description": "Three projects that show how I approach integrations, product engineering and business-focused software.",
+    "technologies": "Technologies",
+    "technologiesOf": "{title} technologies",
+    "links": {
+      "public": "Visit Website",
+      "private": "Private Application — Login Required"
+    },
+    "items": {
+      "realtime-integration-engine": {
+        "category": "Enterprise Systems / Real-Time Integrations",
+        "title": "Real-Time Integration Engine",
+        "context": "Videosoft Soluções em Autoatendimento",
+        "description": "Engineered configurable integrations and real-time product synchronization for enterprise self-service platforms, replacing periodic updates with event-driven communication.",
+        "highlights": [
+          "Configurable integrations managed from the admin panel, with no need to republish the PWA.",
+          "Real-time product synchronization using AWS components and queues.",
+          "Event-driven communication over WebSockets.",
+          "Contributed to integrations with iFood, NCR Aloha/Colibri, TOTVS and GCOM."
+        ],
+        "visualCaption": "Conceptual illustration"
+      },
+      "order-management-platform": {
+        "category": "Business Automation / Full Stack",
+        "title": "Order Management Platform",
+        "context": "Antero Pedidos · Independent project",
+        "description": "Designed and developed a custom order management platform to streamline business workflows and reduce reliance on manual processes.",
+        "highlights": [
+          "Built for the operational workflows of a commercial operation.",
+          "Designed with the goal of reducing manual controls in day-to-day work."
+        ],
+        "visualCaption": "Conceptual illustration · no real data"
+      },
+      "antero-sistemas-website": {
+        "category": "Web Development / Business Website",
+        "title": "Antero Sistemas",
+        "context": "Corporate website · Own software brand",
+        "description": "Designed and developed the corporate website for Antero Sistemas using Next.js and TypeScript, with responsive interfaces, clear service presentation, and email delivery integrated through Resend and Cloudflare.",
+        "highlights": [
+          "Responsive interface.",
+          "Clear presentation of services.",
+          "Email delivery integrated through Resend and Cloudflare.",
+          "Built around discovery and contact."
+        ],
+        "visualCaption": "Illustrative layout"
+      }
+    },
+    "visual": {
+      "partners": { "label": "Partners", "sub": "3rd-party APIs" },
+      "queue": { "label": "Queue", "sub": "events" },
+      "engine": { "label": "Engine", "sub": "integration bot" },
+      "admin": { "label": "Admin panel", "sub": "configuration" },
+      "pwa": { "label": "PWA", "sub": "self-service" }
+    }
+  },
+  "experience": {
+    "eyebrow": "02 / Experience",
+    "title": "Where I've worked",
+    "description": "A decade of building software, from an internship in 2016 to senior backend and full stack roles.",
+    "technologiesOf": "{company} technologies",
+    "items": {
+      "altaa": {
+        "role": "Senior Software Engineer — Backend",
+        "project": "Pousti project",
+        "highlights": [
+          "Backend for an AI-powered content creation SaaS, working exclusively on the server side.",
+          "Evolved APIs and the contracts consumed by the frontend; fixed issues in agentic onboarding, persistence, visual generation and asset processing.",
+          "Worked on Meta/Instagram and Stripe integrations, incident investigation, observability and regression tests."
+        ]
+      },
+      "antero": {
+        "role": "Software Consultant — Full Stack & Mobile",
+        "project": "Independent projects",
+        "highlights": [
+          "Delivered web and mobile solutions on demand, covering architecture, implementation and system integration.",
+          "Lamp InPunto: defined the architecture and integration flows for the mobile application, connecting the software with custom laboratory hardware and coordinating technical decisions across a distributed team. An administrative management interface is being planned for the next version.",
+          "Built an order management platform in Next.js and the Antero Sistemas corporate website."
+        ]
+      },
+      "imagem": {
+        "role": "Full Stack Developer",
+        "project": "Petrobras projects",
+        "highlights": [
+          "Built web applications and GIS solutions, including tools to map wells and occurrences on seismic lines.",
+          "Integrated mapping services, databases and APIs.",
+          "Took part in CI/CD and observability practices."
+        ]
+      },
+      "videosoft": {
+        "role": "Full Stack Developer",
+        "highlights": [
+          "Evolved the VS Food PWA and led a squad technically.",
+          "Developed an integration bot with NestJS and WebSockets, plus integrations configurable from the admin panel and connections to third-party systems.",
+          "Automated testing with Jest and CI/CD practices."
+        ]
+      },
+      "efrete": {
+        "role": "Full Stack Developer",
+        "highlights": [
+          "Built APIs and solutions for freight quotation, tracking and management.",
+          "Contributed to the Frete Cargas app (later Frete Mínimo) and to gamification features.",
+          "Improved database performance and stability."
+        ]
+      },
+      "nox": {
+        "role": "Software Developer — Intern to Junior",
+        "highlights": [
+          "Worked on ERP systems and route visualization tools, integrating location data.",
+          "Built a SOAP API and messaging with AWS SQS/SNS.",
+          "Developed a Java desktop application integrated with a biometric reader."
+        ]
+      }
+    }
+  },
+  "lab": {
+    "eyebrow": "03 / Lab",
+    "title": "Interactive Lab",
+    "description": "A tiny interactive challenge inspired by real-time systems."
+  },
+  "about": {
+    "eyebrow": "04 / About",
+    "title": "About me",
+    "paragraphs": [
+      "I'm a Senior Full Stack Software Engineer based in Santa Catarina, Brazil, with over 10 years of experience building web applications, enterprise platforms and custom software.",
+      "My work spans frontend engineering, backend architecture, real-time integrations and business automation. I've also led a squad technically and worked closely with multidisciplinary teams.",
+      "I've contributed to projects across retail, logistics, geospatial systems and AI-powered SaaS products, pairing technical depth with a practical approach to business problems and turning operational challenges into well-designed products."
+    ],
+    "focusLabel": "Focus areas",
+    "focus": {
+      "product": {
+        "title": "Product engineering",
+        "text": "Web and mobile applications, from architecture to delivery."
+      },
+      "backend": {
+        "title": "Backend & integrations",
+        "text": "APIs, messaging and connections between third-party systems."
+      },
+      "realtime": {
+        "title": "Real-time systems",
+        "text": "Event-driven communication and WebSockets."
+      },
+      "leadership": {
+        "title": "Technical leadership",
+        "text": "Leading a squad and working with multidisciplinary teams."
+      }
+    },
+    "facts": {
+      "location": "Santa Catarina, Brazil",
+      "experience": "10+ years in software development"
+    },
+    "education": {
+      "title": "Education",
+      "inProgressSince": "In progress since {date}",
+      "items": {
+        "avantis": { "degree": "Bachelor's Degree in Information Systems" },
+        "unipds": { "degree": "Postgraduate Studies in Applied AI Engineering" }
+      }
+    },
+    "skills": {
+      "title": "Technical focus",
+      "description": "The tools I use most, grouped by area.",
+      "groupLabel": "{group} skills",
+      "groups": {
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "data": "Data & Messaging",
+        "cloud": "Cloud & DevOps",
+        "quality": "Engineering Quality"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "05 / Contact",
+    "title": "Let's build something.",
+    "description": "The best way to reach me is by email or LinkedIn.",
+    "labels": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "email": "Email"
+    }
+  },
+  "footer": {
+    "builtWith": "Built with Next.js, TypeScript and Tailwind CSS.",
+    "backToTop": "Back to top ↑"
+  },
+  "packetRush": {
+    "region": "Packet Rush mini game",
+    "status": {
+      "label": "Status:",
+      "idle": "Standby",
+      "playing": "Live",
+      "finished": "Ended"
+    },
+    "intro": {
+      "title": "Packet Rush",
+      "subtitle": "Can you keep the network running?",
+      "instruction": "Route incoming events to the correct service before time runs out.",
+      "rulesLabel": "Routing rules",
+      "goesTo": "goes to",
+      "summary": "{events} events · {seconds} seconds · +{correct} for a correct route, −{wrong} for a wrong one.",
+      "tip": "Tip: during a round you can also press 1, 2 or 3.",
+      "start": "Start Game"
+    },
+    "playing": {
+      "groupLabel": "Game in progress",
+      "score": "Score",
+      "time": "Time",
+      "routed": "Routed",
+      "timerLabel": "Seconds remaining",
+      "seconds": "{seconds}s",
+      "incoming": "Incoming event"
+    },
+    "feedback": {
+      "correct": "Correct +{points}",
+      "wrong": "Not quite: {event} goes to {service}",
+      "wrongPenalty": "Not quite: {event} goes to {service} ({delta})"
+    },
+    "announce": {
+      "started": "Game started.",
+      "correct": "Correct, plus {points} points.",
+      "wrong": "Wrong. {event} goes to {service}.",
+      "incoming": "Incoming event: {event}. {description}"
+    },
+    "result": {
+      "completedLabel": "All events routed",
+      "timeoutLabel": "Time ran out",
+      "completedTitle": "Network cleared",
+      "timeoutTitle": "Time's up",
+      "points": "/ {max} points",
+      "correct": "Routed correctly",
+      "answered": "Events answered",
+      "playAgain": "Play Again",
+      "promo": "Enjoyed routing events? Explore how I worked with real-time integrations using NestJS and WebSockets.",
+      "projectLink": "Explore the Real-Time Integration Project"
+    },
+    "events": {
+      "PRICE_UPDATE": "A product's price changed.",
+      "STOCK_CHANGED": "An item's inventory changed.",
+      "ORDER_CREATED": "A customer placed an order."
+    },
+    "services": {
+      "PRICING": "prices",
+      "STOCK": "inventory",
+      "ORDERS": "orders"
+    }
+  }
+}

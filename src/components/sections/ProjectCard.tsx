@@ -1,10 +1,17 @@
 import { ArrowUpRight, Lock } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/Badge";
 import type { Project } from "@/types/content";
 import { ProjectVisual } from "./ProjectVisual";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const t = useTranslations("projects");
+  const tTech = useTranslations("tech");
+  const tCommon = useTranslations("common");
   const { featured, link } = project;
+  const key = `items.${project.id}`;
+  const title = t(`${key}.title`);
+  const highlights = t.raw(`${key}.highlights`) as string[];
   const titleId = `project-${project.id}`;
 
   return (
@@ -33,7 +40,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <ProjectVisual kind={project.visual} />
           </div>
           <span className="border-border bg-surface/90 text-muted absolute top-4 left-4 rounded-full border px-3 py-1 font-mono text-[11px]">
-            {project.visualCaption}
+            {t(`${key}.visualCaption`)}
           </span>
         </div>
       </div>
@@ -41,7 +48,7 @@ export function ProjectCard({ project }: { project: Project }) {
       {/* content */}
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <p className="text-primary/90 font-mono text-[11px] tracking-widest uppercase">
-          {project.category}
+          {t(`${key}.category`)}
         </p>
         <h3
           id={titleId}
@@ -49,14 +56,14 @@ export function ProjectCard({ project }: { project: Project }) {
             featured ? "text-2xl sm:text-3xl" : "text-2xl"
           }`}
         >
-          {project.title}
+          {title}
         </h3>
-        <p className="text-muted mt-1 text-sm">{project.context}</p>
+        <p className="text-muted mt-1 text-sm">{t(`${key}.context`)}</p>
 
-        <p className="text-muted mt-5 leading-relaxed text-pretty">{project.description}</p>
+        <p className="text-muted mt-5 leading-relaxed text-pretty">{t(`${key}.description`)}</p>
 
         <ul className="mt-6 space-y-2.5 text-sm">
-          {project.highlights.map((item) => (
+          {highlights.map((item) => (
             <li key={item} className="text-foreground/85 flex gap-3 leading-relaxed">
               <span className="bg-primary mt-2 size-1.5 shrink-0 rounded-full" aria-hidden="true" />
               {item}
@@ -67,14 +74,17 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.technologies.length > 0 ? (
           <div className="mt-7">
             <p className="text-muted mb-3 font-mono text-[11px] tracking-widest uppercase">
-              Technologies
+              {t("technologies")}
             </p>
-            <ul className="flex flex-wrap gap-2" aria-label={`${project.title} technologies`}>
-              {project.technologies.map((tech) => (
-                <li key={tech}>
-                  <Badge>{tech}</Badge>
-                </li>
-              ))}
+            <ul className="flex flex-wrap gap-2" aria-label={t("technologiesOf", { title })}>
+              {project.technologies.map((tech) => {
+                const label = typeof tech === "string" ? tech : tTech(tech.key);
+                return (
+                  <li key={label}>
+                    <Badge>{label}</Badge>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ) : null}
@@ -92,13 +102,13 @@ export function ProjectCard({ project }: { project: Project }) {
               }`}
             >
               {link.kind === "private" ? <Lock size={14} aria-hidden /> : null}
-              {link.label}
+              {t(`links.${link.kind}`)}
               <ArrowUpRight
                 size={14}
                 className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
                 aria-hidden
               />
-              <span className="sr-only"> (opens in a new tab)</span>
+              <span className="sr-only"> {tCommon("opensInNewTab")}</span>
             </a>
           </div>
         ) : null}

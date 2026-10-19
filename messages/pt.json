@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "title": "{name} | Engenheiro de Software Full Stack Sênior",
+    "description": "Portfólio de um Engenheiro de Software Full Stack Sênior que desenvolve aplicações escaláveis, integrações em tempo real e experiências digitais bem planejadas."
+  },
+  "common": {
+    "skipToContent": "Pular para o conteúdo",
+    "opensInNewTab": "(abre em nova aba)"
+  },
+  "navigation": {
+    "work": "Projetos",
+    "experience": "Experiência",
+    "lab": "Laboratório",
+    "about": "Sobre",
+    "contact": "Contato",
+    "getInTouch": "Entrar em contato",
+    "primary": "Principal",
+    "mobile": "Menu móvel",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "backToTop": "{name} — voltar ao topo",
+    "language": {
+      "label": "Idioma",
+      "en": "English",
+      "pt": "Português (Brasil)"
+    }
+  },
+  "hero": {
+    "role": "Engenheiro de Software Full Stack Sênior",
+    "titleLine1": "Construindo sistemas complexos.",
+    "titleLine2": "Tornando tudo mais",
+    "titleAccent": "simples.",
+    "description": "Desenvolvo aplicações escaláveis, integrações em tempo real e experiências digitais bem planejadas.",
+    "exploreWork": "Ver meus projetos",
+    "getInTouch": "Entrar em contato",
+    "coreStack": "Stack principal",
+    "coreTechnologies": "Tecnologias principais"
+  },
+  "architecture": {
+    "ariaLabel": "Diagrama de uma arquitetura de sistema: uma requisição do cliente passa por um gateway até os serviços e o banco de dados, e um evento em tempo real retorna ao cliente via WebSocket.",
+    "simulated": "tráfego simulado",
+    "legendRequest": "requisição",
+    "legendEvent": "evento em tempo real",
+    "nodes": {
+      "client": { "label": "Cliente", "sub": "app web" },
+      "gateway": { "label": "Gateway", "sub": "REST API" },
+      "realtime": { "label": "WebSocket", "sub": "tempo real" },
+      "services": { "label": "Serviços", "sub": "regras de negócio" },
+      "database": { "label": "Banco de dados", "sub": "SQL · NoSQL" }
+    }
+  },
+  "tech": {
+    "queuesMessaging": "Filas e mensageria",
+    "automatedTesting": "Testes automatizados",
+    "integrationTesting": "Testes de integração",
+    "observability": "Observabilidade"
+  },
+  "projects": {
+    "eyebrow": "01 / Projetos",
+    "title": "Projetos selecionados",
+    "description": "Três projetos que mostram como abordo integrações, engenharia de produto e software voltado ao negócio.",
+    "technologies": "Tecnologias",
+    "technologiesOf": "Tecnologias de {title}",
+    "links": {
+      "public": "Visitar site",
+      "private": "Aplicação privada — Login necessário"
+    },
+    "items": {
+      "realtime-integration-engine": {
+        "category": "Sistemas Corporativos / Integrações em Tempo Real",
+        "title": "Motor de Integrações em Tempo Real",
+        "context": "Videosoft Soluções em Autoatendimento",
+        "description": "Desenvolvi integrações configuráveis e a sincronização de produtos em tempo real para plataformas corporativas de autoatendimento, substituindo atualizações periódicas por comunicação orientada a eventos.",
+        "highlights": [
+          "Integrações configuráveis pelo painel administrativo, sem necessidade de republicar a PWA.",
+          "Sincronização de produtos em tempo real com componentes AWS e filas.",
+          "Comunicação orientada a eventos via WebSockets.",
+          "Contribuição em integrações com iFood, NCR Aloha/Colibri, TOTVS e GCOM."
+        ],
+        "visualCaption": "Ilustração conceitual"
+      },
+      "order-management-platform": {
+        "category": "Automação de Processos / Full Stack",
+        "title": "Plataforma de Gestão de Pedidos",
+        "context": "Antero Pedidos · Projeto independente",
+        "description": "Projetei e desenvolvi uma plataforma sob medida de gestão de pedidos para agilizar os fluxos de trabalho e reduzir a dependência de processos manuais.",
+        "highlights": [
+          "Criada para os fluxos operacionais de uma operação comercial.",
+          "Pensada com o objetivo de reduzir controles manuais no dia a dia."
+        ],
+        "visualCaption": "Ilustração conceitual · sem dados reais"
+      },
+      "antero-sistemas-website": {
+        "category": "Desenvolvimento Web / Site Institucional",
+        "title": "Antero Sistemas",
+        "context": "Site institucional · Marca própria de software",
+        "description": "Projetei e desenvolvi o site institucional da Antero Sistemas com Next.js e TypeScript, com interfaces responsivas, apresentação clara dos serviços e envio de e-mails integrado via Resend e Cloudflare.",
+        "highlights": [
+          "Interface responsiva.",
+          "Apresentação clara dos serviços.",
+          "Envio de e-mails integrado via Resend e Cloudflare.",
+          "Estruturado para a descoberta de serviços e o contato."
+        ],
+        "visualCaption": "Layout ilustrativo"
+      }
+    },
+    "visual": {
+      "partners": { "label": "Parceiros", "sub": "APIs de terceiros" },
+      "queue": { "label": "Fila", "sub": "eventos" },
+      "engine": { "label": "Motor", "sub": "integrações" },
+      "admin": { "label": "Painel admin", "sub": "configuração" },
+      "pwa": { "label": "PWA", "sub": "autoatendimento" }
+    }
+  },
+  "experience": {
+    "eyebrow": "02 / Experiência",
+    "title": "Onde já trabalhei",
+    "description": "Uma década construindo software, de um estágio em 2016 a posições sêniores em backend e full stack.",
+    "technologiesOf": "Tecnologias na {company}",
+    "items": {
+      "altaa": {
+        "role": "Engenheiro de Software Sênior — Backend",
+        "project": "Projeto Pousti",
+        "highlights": [
+          "Backend de um SaaS de criação de conteúdo com IA, atuando exclusivamente no lado do servidor.",
+          "Evolução das APIs e dos contratos consumidos pelo frontend; correções em onboarding agêntico, persistência, geração visual e processamento de assets.",
+          "Atuação em integrações com Meta/Instagram e Stripe, investigação de incidentes, observabilidade e testes de regressão."
+        ]
+      },
+      "antero": {
+        "role": "Consultor de Software — Full Stack e Mobile",
+        "project": "Projetos independentes",
+        "highlights": [
+          "Desenvolvimento de soluções web e mobile sob demanda, abrangendo arquitetura, implementação e integração de sistemas.",
+          "Lamp InPunto: definição da arquitetura e dos fluxos de integração do aplicativo mobile, conectando o software a um hardware laboratorial personalizado e coordenando decisões técnicas com uma equipe distribuída. Uma interface administrativa de gerenciamento está sendo planejada para a próxima versão.",
+          "Desenvolvimento de uma plataforma de gestão de pedidos em Next.js e do site institucional da Antero Sistemas."
+        ]
+      },
+      "imagem": {
+        "role": "Desenvolvedor Full Stack",
+        "project": "Projetos Petrobras",
+        "highlights": [
+          "Desenvolvimento de aplicações web e soluções GIS, incluindo ferramentas para mapear poços e ocorrências em linhas sísmicas.",
+          "Integração com serviços de mapas, bancos de dados e APIs.",
+          "Participação em práticas de CI/CD e observabilidade."
+        ]
+      },
+      "videosoft": {
+        "role": "Desenvolvedor Full Stack",
+        "highlights": [
+          "Evolução da PWA VS Food e liderança técnica de um squad.",
+          "Desenvolvimento de um robô de integrações com NestJS e WebSockets, além de integrações configuráveis pelo painel administrativo e conexões com sistemas de terceiros.",
+          "Testes automatizados com Jest e práticas de CI/CD."
+        ]
+      },
+      "efrete": {
+        "role": "Desenvolvedor Full Stack",
+        "highlights": [
+          "Desenvolvimento de APIs e soluções para cotação, rastreamento e gestão de fretes.",
+          "Contribuição no aplicativo Frete Cargas (posteriormente Frete Mínimo) e em soluções de gamificação.",
+          "Melhorias de desempenho e estabilidade de bancos de dados."
+        ]
+      },
+      "nox": {
+        "role": "Desenvolvedor de Software — de Estagiário a Júnior",
+        "highlights": [
+          "Atuação em sistemas ERP e ferramentas de visualização de rotas, com integração de dados de localização.",
+          "Desenvolvimento de uma API SOAP e de mensageria com AWS SQS/SNS.",
+          "Desenvolvimento de uma aplicação desktop em Java integrada a um leitor biométrico."
+        ]
+      }
+    }
+  },
+  "lab": {
+    "eyebrow": "03 / Laboratório",
+    "title": "Laboratório Interativo",
+    "description": "Um pequeno desafio interativo inspirado em sistemas em tempo real."
+  },
+  "about": {
+    "eyebrow": "04 / Sobre",
+    "title": "Sobre mim",
+    "paragraphs": [
+      "Sou Engenheiro de Software Full Stack Sênior, baseado em Santa Catarina, Brasil, com mais de 10 anos de experiência na construção de aplicações web, plataformas corporativas e software sob medida.",
+      "Meu trabalho abrange engenharia de frontend, arquitetura de backend, integrações em tempo real e automação de processos. Também liderei tecnicamente um squad e trabalhei de perto com equipes multidisciplinares.",
+      "Contribuí em projetos de varejo, logística, sistemas geoespaciais e produtos SaaS com IA, unindo profundidade técnica a uma abordagem prática para problemas de negócio e transformando desafios operacionais em produtos bem projetados."
+    ],
+    "focusLabel": "Áreas de atuação",
+    "focus": {
+      "product": {
+        "title": "Engenharia de produto",
+        "text": "Aplicações web e mobile, da arquitetura à entrega."
+      },
+      "backend": {
+        "title": "Backend e integrações",
+        "text": "APIs, mensageria e conexões entre sistemas de terceiros."
+      },
+      "realtime": {
+        "title": "Sistemas em tempo real",
+        "text": "Comunicação orientada a eventos e WebSockets."
+      },
+      "leadership": {
+        "title": "Liderança técnica",
+        "text": "Liderança de squad e trabalho com equipes multidisciplinares."
+      }
+    },
+    "facts": {
+      "location": "Santa Catarina, Brasil",
+      "experience": "10+ anos em desenvolvimento de software"
+    },
+    "education": {
+      "title": "Formação",
+      "inProgressSince": "Em andamento desde {date}",
+      "items": {
+        "avantis": { "degree": "Bacharelado em Sistemas de Informação" },
+        "unipds": { "degree": "Pós-graduação em Engenharia de IA Aplicada" }
+      }
+    },
+    "skills": {
+      "title": "Foco técnico",
+      "description": "As ferramentas que mais utilizo, agrupadas por área.",
+      "groupLabel": "Competências de {group}",
+      "groups": {
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "data": "Dados e Mensageria",
+        "cloud": "Cloud e DevOps",
+        "quality": "Qualidade de Engenharia"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "05 / Contato",
+    "title": "Vamos construir algo juntos.",
+    "description": "A melhor forma de falar comigo é por e-mail ou LinkedIn.",
+    "labels": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "email": "E-mail"
+    }
+  },
+  "footer": {
+    "builtWith": "Feito com Next.js, TypeScript e Tailwind CSS.",
+    "backToTop": "Voltar ao topo ↑"
+  },
+  "packetRush": {
+    "region": "Minijogo Packet Rush",
+    "status": {
+      "label": "Status:",
+      "idle": "Em espera",
+      "playing": "Ao vivo",
+      "finished": "Encerrado"
+    },
+    "intro": {
+      "title": "Packet Rush",
+      "subtitle": "Você consegue manter a rede funcionando?",
+      "instruction": "Encaminhe os eventos recebidos para o serviço correto antes que o tempo acabe.",
+      "rulesLabel": "Regras de roteamento",
+      "goesTo": "vai para",
+      "summary": "{events} eventos · {seconds} segundos · +{correct} por rota correta, −{wrong} por rota errada.",
+      "tip": "Dica: durante a rodada, você também pode pressionar 1, 2 ou 3.",
+      "start": "Começar jogo"
+    },
+    "playing": {
+      "groupLabel": "Jogo em andamento",
+      "score": "Pontuação",
+      "time": "Tempo",
+      "routed": "Enviados",
+      "timerLabel": "Segundos restantes",
+      "seconds": "{seconds}s",
+      "incoming": "Evento recebido"
+    },
+    "feedback": {
+      "correct": "Correto +{points}",
+      "wrong": "Incorreto: {event} vai para {service}",
+      "wrongPenalty": "Incorreto: {event} vai para {service} ({delta})"
+    },
+    "announce": {
+      "started": "Jogo iniciado.",
+      "correct": "Correto, mais {points} pontos.",
+      "wrong": "Incorreto. {event} vai para {service}.",
+      "incoming": "Evento recebido: {event}. {description}"
+    },
+    "result": {
+      "completedLabel": "Todos os eventos encaminhados",
+      "timeoutLabel": "O tempo acabou",
+      "completedTitle": "Missão concluída",
+      "timeoutTitle": "Tempo esgotado",
+      "points": "/ {max} pontos",
+      "correct": "Enviados corretamente",
+      "answered": "Eventos respondidos",
+      "playAgain": "Jogar novamente",
+      "promo": "Gostou de encaminhar eventos? Conheça como atuei com integrações em tempo real usando NestJS e WebSockets.",
+      "projectLink": "Conhecer o projeto de integração em tempo real"
+    },
+    "events": {
+      "PRICE_UPDATE": "O preço de um produto foi alterado.",
+      "STOCK_CHANGED": "O estoque de um produto foi alterado.",
+      "ORDER_CREATED": "Um cliente fez um pedido."
+    },
+    "services": {
+      "PRICING": "preços",
+      "STOCK": "estoque",
+      "ORDERS": "pedidos"
+    }
+  }
+}
