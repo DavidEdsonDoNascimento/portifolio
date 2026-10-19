@@ -7,12 +7,13 @@ type Props = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-colors duration-200";
+  "group inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium transition-all duration-200 motion-safe:active:scale-[0.98] sm:w-auto";
 
 const variants = {
-  primary: "bg-primary text-background hover:bg-primary/85",
+  primary:
+    "bg-primary text-background hover:bg-primary/90 hover:shadow-[0_0_0_4px_color-mix(in_srgb,var(--color-primary)_18%,transparent),0_8px_24px_-8px_color-mix(in_srgb,var(--color-primary)_55%,transparent)]",
   ghost:
-    "border border-border text-foreground hover:border-primary/60 hover:text-primary",
+    "border border-border bg-surface/40 text-foreground hover:border-primary/60 hover:bg-surface hover:text-primary",
 } as const;
 
 export function ButtonLink({ href, variant = "primary", children }: Props) {
