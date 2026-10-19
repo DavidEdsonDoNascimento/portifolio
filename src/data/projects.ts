@@ -36,10 +36,10 @@ export const projects: Project[] = [
     title: "Order Management Platform",
     context: "Antero Pedidos · Independent project",
     description:
-      "Developed a custom order management platform designed to organize business workflows and support the automation of manual operations.",
+      "Designed and developed a custom order management platform to streamline business workflows and reduce reliance on manual processes.",
     highlights: [
-      "A custom application built to support the operational workflows of a commercial operation.",
-      "Reduces reliance on manual controls in day-to-day workflows.",
+      "Built for the operational workflows of a commercial operation.",
+      "Designed with the goal of reducing manual controls in day-to-day work.",
     ],
     technologies: ["Next.js", "React", "TypeScript"],
     visual: "orders",
@@ -56,15 +56,14 @@ export const projects: Project[] = [
     title: "Antero Sistemas",
     context: "Corporate website · Own software brand",
     description:
-      "Designed and developed the corporate website for Antero Sistemas, presenting custom software services through a clear, responsive and business-oriented digital experience.",
+      "Designed and developed the corporate website for Antero Sistemas using Next.js and TypeScript, with responsive interfaces, clear service presentation, and email delivery integrated through Resend and Cloudflare.",
     highlights: [
       "Responsive interface.",
-      "Presentation of services.",
-      "Organized content structure.",
+      "Clear presentation of services.",
+      "Email delivery integrated through Resend and Cloudflare.",
       "Built around discovery and contact.",
     ],
-    // No technologies listed until they are confirmed.
-    technologies: [],
+    technologies: ["Next.js", "TypeScript", "Resend", "Cloudflare"],
     visual: "website",
     visualCaption: "Illustrative layout",
     link: {

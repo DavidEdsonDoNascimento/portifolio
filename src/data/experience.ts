@@ -35,7 +35,7 @@ export const experience: ExperienceEntry[] = [
     period: "Jun 2026 – Aug 2026",
     highlights: [
       "Delivered web and mobile solutions on demand, covering architecture, implementation and system integration.",
-      "Lamp InPunto: defined the architecture and the integration between an app and custom hardware that processes samples and sends back results.",
+      "Lamp InPunto: defined the architecture and integration flows for the mobile application, connecting the software with custom laboratory hardware and coordinating technical decisions across a distributed team. An administrative management interface is being planned for the next version.",
       "Built an order management platform in Next.js and the Antero Sistemas corporate website.",
     ],
     stack: ["Next.js", "React", "TypeScript"],
